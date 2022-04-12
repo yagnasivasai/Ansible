@@ -16,7 +16,9 @@
         owner: root
         group: root
         mode: 0644
-      notify: restart apache
+      notify:
+        - restart apache
+        - restart memcache
       with_items:
         - src: index.html
           dest: /var/www/html/index.html
@@ -35,6 +37,10 @@
       service:
         name: apache2
         state: restarted
+    - name: restart memcache
+      service:
+        name: memcached
+        state: restarted
 
     # - name: Copy Configuration files
     #   copy:
@@ -43,9 +49,11 @@
     #     owner: root
     #     group: root
     #     mode: 0644
+    #     notify: restart apache
     #   with_items:
     #     - src: index.html
     #       dest: /var/www/html/index.html
+
 
     # - name: Ensure If apache is boot up enabled.
     #   service:
