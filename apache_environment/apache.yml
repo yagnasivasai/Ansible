@@ -9,17 +9,6 @@
         name: apache2
         state: present
 
-    - name: Add an Environment variable to the remote users shell
-      lineinfile:
-        dest: "~/.bashrc"
-        regexp: '^ENV_VAR= '
-        line: 'ENV_VAR=value'
-      become: false
-    - name: get the environment variable
-      shell: 'source ~/.bashrc && echo $ENV_VAR'
-      register: foo
-    - debug: msg="The Variable is {{ foo.stdout }}"
-      
     - name: Copy Configuration files
       copy:
         src: "{{ item.src}}"

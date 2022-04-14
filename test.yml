@@ -11,7 +11,7 @@
 
     - name: Add an Environment variable to the remote users shell
       lineinfile:
-        dest: "~/.bashrc"
+        dest: "~/.bash_profile"
         regexp: '^ENV_VAR= '
         line: 'ENV_VAR=value'
       become: false
@@ -71,3 +71,4 @@
     #     name: apache2
     #     state: started
     #     enabled: true
+
